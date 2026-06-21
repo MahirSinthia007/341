@@ -25,6 +25,14 @@ MOV AX,0F4D5h
 MOV BX,0C9A5h
 DIV BX
 
+;Task 8-4 to catch dividend error
+MOV AX,0C2A2h
+MOV BX,0ABCDh
+MUL BX
+
+MOV CX,0BEDh
+DIV CX
+
 
  
 
