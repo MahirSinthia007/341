@@ -116,3 +116,45 @@ INT 21H
 
 MAIN ENDP
     END MAIN
+
+
+.MODEL SMALL
+ 
+.STACK 100H
+
+.DATA
+
+; declare variables here
+
+.CODE
+MAIN PROC
+
+; initialize DS
+
+MOV AX,@DATA
+MOV DS,AX
+ 
+; enter your code here
+
+MOV DL,31h
+MOV AH,2
+
+LOOP_START:          ;explicit loop
+
+     CMP DL,35h
+     JE END_BLOCK
+     INT 21h
+     INC DL
+     JMP LOOP_START
+
+END_BLOCK:
+
+ 
+
+;exit to DOS
+               
+MOV AX,4C00H
+INT 21H
+
+MAIN ENDP
+    END MAIN
