@@ -51,3 +51,68 @@ INT 21H
 
 MAIN ENDP
     END MAIN
+
+
+ .MODEL SMALL
+ 
+.STACK 100H
+
+.DATA
+
+; declare variables here 
+str1 db "Equal$"
+str2 db "Positive$"
+str3 db "Negative$"
+
+
+.CODE
+MAIN PROC
+
+; initialize DS
+
+MOV AX,@DATA
+MOV DS,AX
+
+MOV bl,00h
+
+mov ah,1
+int 21h
+sub al,30h
+
+cmp al,bl
+
+JE EQUAL
+JG GREATER
+JL LESS
+
+EQUAL:
+   lea dx,str1
+   mov ah,9
+   int 21h
+   JMP END1
+GREATER:
+   lea dx,str2
+   mov ah,9
+   int 21h
+   JMP END1
+LESS:
+   lea dx,str3
+   mov ah,9
+   int 21h
+   JMP END1
+   
+END1:
+
+
+
+
+
+ 
+
+;exit to DOS
+               
+MOV AX,4C00H
+INT 21H
+
+MAIN ENDP
+    END MAIN
