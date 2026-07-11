@@ -260,5 +260,58 @@ int 21h
 MOV AX,4C00H
 INT 21H
 
+.MODEL SMALL
+ 
+.STACK 100H
+
+.DATA
+
+; declare variables here
+
+asterick DB "********** $"
+
+.CODE
+MAIN PROC
+
+; initialize DS
+
+MOV AX,@DATA
+MOV DS,AX
+ 
+; enter your code here
+
+mov cx,10
+
+LOOP1:
+  lea dx,asterick
+  mov ah, 9
+  int 21h
+  
+  mov ah,2
+  mov dl,13
+  
+  int 21h
+  
+  mov ah,2
+  mov dl,10
+  int 21h
+  
+  
+  
+  Loop LOOP1
+
+
+
+
+ 
+
+;exit to DOS
+               
+MOV AX,4C00H
+INT 21H
+
+MAIN ENDP
+    END MAIN
+
 MAIN ENDP
     END MAIN
