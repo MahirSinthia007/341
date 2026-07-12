@@ -1,0 +1,57 @@
+.MODEL SMALL
+ 
+.STACK 100H
+
+.DATA
+
+; declare variables here
+n dw ?
+div_sum dw ?
+not_div_sum dw ?
+
+.CODE
+MAIN PROC
+
+; initialize DS
+
+MOV AX,@DATA
+MOV DS,AX
+ 
+; enter your code here  
+
+mov cx,1
+mov n,100
+Main_Loop:
+ CMP cx,n
+ JG Exit_code
+ mov bl,9
+ mov ax,cx
+ div bl
+ CMP ah,0
+ JE increment_DIV_sum
+ JMP increment_Non_DIV_sum
+ 
+ 
+ 
+increment_DIV_sum:
+ add div_sum,cx
+ inc cx
+ jmp Main_Loop
+increment_Non_DIV_sum:
+ add not_div_sum,cx
+ inc cx
+ jmp Main_Loop
+
+ 
+
+
+
+Exit_code:
+
+;exit to DOS
+               
+MOV AX,4C00H
+INT 21H
+
+MAIN ENDP
+    END MAIN
