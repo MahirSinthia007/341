@@ -1,0 +1,39 @@
+.MODEL SMALL
+ 
+.STACK 100H
+
+.DATA
+
+; declare variables here 
+
+sum dw ?
+
+
+.CODE
+MAIN PROC
+
+; initialize DS
+
+MOV AX,@DATA
+MOV DS,AX
+ 
+; enter your code here
+mov ax,5
+mov sum,0
+mov bx,100
+Main_Loop:
+ cmp ax,bx
+ JE exit
+ add sum,ax
+ add ax,5
+ JMP Main_Loop 
+
+exit:
+
+;exit to DOS
+               
+MOV AX,4C00H
+INT 21H
+
+MAIN ENDP
+    END MAIN
