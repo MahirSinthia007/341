@@ -195,3 +195,97 @@ INT 21H
 
 MAIN ENDP
     END MAIN
+
+
+.MODEL SMALL
+ 
+.STACK 100H
+
+.DATA
+
+; declare variables here
+n1 db ?
+n2 db ?
+n3 db ?
+max db ?
+
+.CODE
+MAIN PROC
+
+; initialize DS
+
+MOV AX,@DATA
+MOV DS,AX
+ 
+; enter your code here
+
+mov ah,1
+int 21h
+sub al,48
+mov n1,al 
+
+mov ah,1
+int 21h
+sub al,48
+mov n2,al 
+
+mov ah,1
+int 21h
+sub al,48
+mov n3,al
+
+mov al,n1
+mov bl,n2
+cmp al,bl
+JGE first_best
+JL second_best
+
+first_best:
+   mov al,n1
+   mov max,al
+   mov bl,n3
+   cmp al,bl
+   JGE print_first_best
+   mov ah,2
+   mov dl,n3
+   int 21h
+   JMP exit
+print_first_best:
+  mov dl,n1
+  add dl,48
+  mov ah,2
+  int 21h
+  JMP exit
+  
+second_best:
+  mov al,n2
+  mov bl,n3
+  cmp al,bl
+  JGE print_second_best
+  mov ah,2
+  mov dl,n3
+  add dl,48
+  int 21h
+  JMP exit 
+          
+          
+          
+print_second_best:
+  mov dl,n2
+  add dl,48
+  mov ah,2
+  int 21h
+  JMP exit
+ 
+
+
+
+exit:
+
+;exit to DOS
+               
+MOV AX,4C00H
+INT 21H
+
+MAIN ENDP
+    END MAIN
