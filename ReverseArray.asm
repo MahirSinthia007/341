@@ -45,6 +45,7 @@ print:
   sub si,02h
   cmp si,0
   JE exit
+  JMP inner_loop
 
 exit:
     
